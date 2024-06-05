@@ -14,13 +14,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `db_partiu` DEFAULT CHARACTER SET utf8 ;
+USE `db_partiu` ;
 
 -- -----------------------------------------------------
 -- Table `mydb`.`cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`cliente` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`cliente` (
   `codCliente` INT NOT NULL AUTO_INCREMENT,
   `tipo` INT NOT NULL,
   `nome` VARCHAR(50) NOT NULL,
@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`estado`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`estado` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`estado` (
   `codEstado` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`codEstado`))
@@ -45,7 +45,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`cidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`cidade` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`cidade` (
   `codCidade` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `populacao` INT NOT NULL,
@@ -64,7 +64,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`hotel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`hotel` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`hotel` (
   `codHotel` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `numQuartos` INT NOT NULL,
@@ -86,7 +86,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`pacote`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pacote` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`pacote` (
   `codPacote` INT NOT NULL AUTO_INCREMENT,
   `preco` DECIMAL(7,2) NOT NULL,
   `dataInicio` DATE NOT NULL,
@@ -114,7 +114,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`pontoTuristico`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pontoTuristico` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`pontoTuristico` (
   `codPontoTuristico` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `descricao` TEXT NOT NULL,
@@ -135,7 +135,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`restaurante`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`restaurante` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`restaurante` (
   `codRestaurante` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `categoria` INT(10) NOT NULL,
@@ -158,7 +158,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`cliente_has_pacote`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`cliente_has_pacote` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`cliente_has_pacote` (
   `cliente_codCliente` INT NOT NULL,
   `pacote_codPacote` INT NOT NULL,
   PRIMARY KEY (`cliente_codCliente`, `pacote_codPacote`),
@@ -180,7 +180,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`pacote_has_pontoTuristico`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pacote_has_pontoTuristico` (
+CREATE TABLE IF NOT EXISTS `db_partiu`.`pacote_has_pontoTuristico` (
   `pacote_codPacote` INT NOT NULL,
   `pontoTuristico_codPontoTuristico` INT NOT NULL,
   `dia` DATE NOT NULL,
