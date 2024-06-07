@@ -1,0 +1,32 @@
+.menu{
+    margin-left: 4em;
+}
+
+.menu__home-icon{
+    font-size: 1.5em;
+}
+
+.nav-link{
+    color: var(--preto);
+}
+
+.nav-link:hover{
+    color: var(--laranja);
+}
+
+.nav-item-divider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.nav-item-divider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 1px;
+    height: 60%;
+    background-color: #000;
+}

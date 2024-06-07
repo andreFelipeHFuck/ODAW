@@ -1,0 +1,29 @@
+
+.container__link{
+    color: var(--preto);
+    text-decoration: none;
+}
+
+.container__icones{
+    margin-bottom: 0.5em;
+}
+
+.redes__icon{
+    font-size: 35px;
+    margin-right: 0.5em;
+}
+
+.pagamento__icon{
+    height: 2.5em;
+    width: 2.5em;
+    margin-right: 0.7em;
+}
+
+.no-letter-spacing {
+    letter-spacing: normal;
+}
+
+/* Reduz o espaçamento entre parágrafos */
+.tight-paragraphs p {
+    margin-bottom: 0.1rem;
+}

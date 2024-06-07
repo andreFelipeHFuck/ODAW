@@ -1,32 +1,28 @@
-<body>
-    <!-- ... other HTML ... -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" integrity="sha512-8Q6Y9XnTbOE+JNvjBQwJ2H8S+UV4uA6hiRykhdtIyDYZ2TprdNmWOUaKdGzOhyr4dCyk287OejbPvwl7lrfqrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" integrity="sha512-MOCpqoRoisCTwJ8vQQiciZv0qcpROCidek3GTFS6KTk2+y7munJIlKCVkFCYY+p3ErYFXCjmFjnfTTRSC1OHWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.10/babel.min.js" integrity="sha512-aKni+N2bgewoe8CGZlB9c0IDLU5LQaMEZFNjP6FbDK8gZhdTdNKhYKgZaY/EYL9GKJeJigN/wA7WDAOJShgMAQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% extends "template.html" %}
 
-  
-    <link
-      async
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui-react/dist/umd/semantic-ui-react.min.js"></script>
+{% block main %} 
 
-    <div id="root"></div>
+<div class="card">
+    <img src="{{  url_for('static', filename='image/principal.jpg') }}" class="card-img" alt="...">
+    <div class="card-img-overlay">
+        <div class="dp-flex flex-column">
+            <h1 class="card-title">Card title</h1>
 
-    <p>Hello World!</p>
-  
-    <!-- Load our React component. -->
-    <script src="">
-        const e = React.createElement
-        const { Button } = semanticUIReact
+            <form class="row g-3">
+                <div class="col-auto">
+                  <label for="staticEmail2" class="visually-hidden">Email</label>
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+                </div>
+                <div class="col-auto">
+                  <label for="inputPassword2" class="visually-hidden">Password</label>
+                  <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+                </div>
+              </form>
+        </div>
+    </div>
+</div>
 
-        // ... Other JS code ...
-
-        const domContainer = document.querySelector('#root')
-
-        // 💡 This example is simplied to use React without JSX
-        //    https://reactjs.org/docs/react-without-jsx.html
-        ReactDOM.render(e(Button, { primary: true }, 'Hello world!'), domContainer)
-    </script>
-  </body>
+{% endblock %}

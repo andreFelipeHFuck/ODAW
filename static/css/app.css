@@ -1,0 +1,20 @@
+@import url(card.css);
+@import url(menu.css);
+@import url(footer.css);
+
+:root{
+    --preto: #000000ff;
+    --branco: #fff;
+    --verde: #00989967;
+    --laranja: #ff6501ff; 
+    --aqua: #05e6faff; 
+
+    /* Font */
+    --main-font: "Maven Pro", sans-serif;
+    --secondy-font: "Open Sans", sans-serif;
+}
+
+body{
+    color: var(--preto);
+    font-family: var(--main-font);
+}
