@@ -3,43 +3,43 @@
 {% block main %} 
 
 <div class="container d-flex justify-content-center align-items-center">
-    <div class="card" style="width: 20rem;">
-        <div class="card-body">
+    <div class="secao card-secao">
+        <div class="card-body dp-flex justify-content-center">
             <h3 class="card-title text-center">
                 <strong>Acesse a sua conta</strong>
             </h3>
             
             <p class="text-center mt-3">
-                <button class="btn btn-primary btn-round">
-                    <i class="bi bi-google"></i>
-                    Botão Redondo
-                </button>
+                <a href="{{ url_for('login') }}" class="card-button btn btn-primary btn-round" id="button_login">
+                    <i class="card-icone bi bi-door-open"></i>
+                    Entrar com email ou CPF 
+                </a>
             </p>
 
             <p class="text-center mt-3">
-                <button class="btn btn-primary btn-round">
-                    <i class="bi bi-google"></i>
-                    Botão Redondo
-                </button>
+                <a href="#" class="card-button btn btn-primary btn-round" id="button_facebook">
+                    <i class="card-icone bi bi-facebook"></i>
+                    Continuar com Facebook
+                </a>
             </p>
 
             <p class="text-center mt-3">
-                <button class="btn btn-primary btn-round">
-                    <i class="bi bi-google"></i>
-                    Botão Redondo
-                </button>
+                <a href="#" class="card-button btn btn-primary btn-round" id="button_google">
+                    <i class="card-icone bi bi-google"></i>
+                    Continuar com Google
+                </a>
             </p>
 
 
             <h4 class="text-center mt-3">
-                <strong>Ou  </strong>
+                <strong>Ou</strong>
             </h4>
 
             <p class="text-center mt-3">
-                <button class="btn btn-primary btn-round">
-                    <i class="bi bi-list-columns-reverse"></i>
+                <a href="{{ url_for('cadastrar') }}"  class="card-button btn btn-primary btn-round" id="button_cadastrar">
+                    <i class="card-icone bi bi-list-columns-reverse"></i>
                     Quero me cadastrar 
-                </button>
+                </a>
             </p>
         </div>
     </div>

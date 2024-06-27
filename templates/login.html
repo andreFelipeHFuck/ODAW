@@ -1,0 +1,30 @@
+{% extends "template.html" %}
+
+{% block main %} 
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="login col-md-6">
+            <div class="login-card card mt-5">
+                <div class="login-body card-body">
+                    <h5 class="login-title card-title text-center">Entrar</h5>
+                    <form method="POST" action="{{ url_for('autenticar')}}" class="login-form">
+                        {{ form.csrf_token() }}
+
+                        <div class="mb-3">
+                            {{ form.email(class="login-input form-control rounded-pill", placeholder="Email ou cpf") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.senha(class="login-input form-control rounded-pill", placeholder="Senha") }}
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="login-submit btn rounded-pill">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

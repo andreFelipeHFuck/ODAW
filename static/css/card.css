@@ -1,7 +1,57 @@
-.card{
-    border-radius: 0;
+.card-secao{
+    border: 1px solid var(--laranja);
+    border-radius: 15px;
+    margin-top: 3em;
+    text-align: center;
+    width: 25rem;
+    height: 26em;
+}
+
+.card-title{
+    font-size: 25px;
+    margin-top: 1em;
+}
+
+.card-button{
+    border-radius: 25px;
+    font-size: 15px;
+    padding: 0.75em 0.5em;
+    width: 20em;
+} 
+
+.card-button:hover{
+    font-weight: 700;
 }
 
 .card-img{
     border-radius: 0;
+}
+
+#button_login{
+    background-color: var(--laranja);
+    border: 2px solid var(--preto);
+    color: var(--preto);
+}
+
+#button_facebook{
+    background-color: var(--branco);
+    border: 2px solid var(--preto);
+    color: var(--preto);
+}
+
+#button_google{
+    background-color: var(--branco);
+    border: 2px solid var(--preto);
+    color: var(--preto);
+}
+
+#button_cadastrar{
+    background-color: var(--laranja);
+    border: 2px solid var(--preto);
+    color: var(--preto);
+}
+
+.card-icone{
+    font-size: 20px;
+    margin-right: 0.5em;
 }

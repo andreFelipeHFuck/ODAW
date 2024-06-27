@@ -1,0 +1,97 @@
+{% extends "template.html" %}
+
+{% block main %}
+
+<style>
+    .card-custom {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .form-label-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .form-label-group label {
+        margin-bottom: 5px;
+    }
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+    }
+    .checkbox-label input {
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card card-custom mt-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Cadastro</h2>
+                    <p class="text-center">preencha as informações abaixo</p>
+                    <form method="POST" action="{{ url_for('atualizar_cliente') }}">
+                        {{ form.csrf_token() }}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form.nome.label(class="form-label") }}
+                                    {{ form.nome(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form.cpf.label(class="form-label") }}
+                                    {{ form.cpf(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form.email.label(class="form-label") }}
+                                    {{ form.email(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form.rua.label(class="form-label") }}
+                                    {{ form.rua(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form.bairro.label(class="form-label") }}
+                                    {{ form.bairro(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form.cep.label(class="form-label") }}
+                                    {{ form.cep(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check checkbox-label">
+                            <input type="checkbox" class="form-check-input" id="termos">
+                            <label class="form-check-label" for="termos">Li e aceito os <a href="#">termos de condições</a> do serviço</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

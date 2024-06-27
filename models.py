@@ -8,9 +8,11 @@ class Cliente(db.Model):
     bairro = db.Column(db.String(50), nullable=False)
     rua = db.Column(db.String(50), nullable=False)
     cep = db.Column(db.String(8), nullable=False)
+    email = db.Column(db.String(8), nullable=False)
+    senha = db.Column(db.String(8), nullable=False)
 
     def __repr__(self):
-        return '<Name %r' % self.name
+        return '<Name %r' % self.nome
 
 # class Estado(db.Model):
 #     codEstado = db.Column(db.Integer, primary_key=True, autoincrement=True)

@@ -1,0 +1,41 @@
+.casdatro{
+    width: 10em;
+}
+
+.cadastro-card{
+    border: 1px solid var(--laranja);
+    border-radius: 15px;
+}
+
+.cadastro-titulo{
+    font-size: 30px;
+}
+
+.cadastro-input{
+    border: 2px solid var(--preto);
+    border-radius: 25px;
+    font-size: 20px;
+    padding: 0.5em 1.2em;
+    color: var(--preto);
+}
+
+.cadastro-label{
+    font-size: 20px;
+}
+
+.cadastro-submit:hover{
+    font-weight: 700;
+    border: 2px solid var(--preto);
+    background-color: var(--laranja);
+    color: var(--preto);
+}
+
+.cadastro-submit{
+    border: 2px solid var(--preto);
+    border-radius: 25px;
+    background-color: var(--laranja);
+    color: var(--preto);
+    font-size: 18px;
+    padding: 0.5em 1em;
+    width: 15em;
+}

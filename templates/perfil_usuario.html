@@ -1,0 +1,82 @@
+{% extends "template.html"%}
+
+{% block main %}
+
+<style>
+    .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .profile-header img {
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        margin-right: 20px;
+    }
+    .profile-info {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .profile-info h5 {
+        margin-bottom: 20px;
+    }
+    .profile-info p {
+        margin: 0;
+    }
+    .profile-info .info-group {
+        margin-bottom: 10px;
+    }
+    .info-group span {
+        font-weight: bold;
+    }
+    .package-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        padding: 10px 20px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    .package-item span {
+        font-weight: bold;
+    }
+</style>
+
+
+<div class="container mt-5">
+    <div class="profile-header">
+        <img src="https://via.placeholder.com/120" alt="Foto do Usuário">
+        <div>
+            <h2>{{ cliente.nome }}</h2>
+            <a class="btn btn-secondary" href="{{ url_for('editar_perfil', id=session.get('id')) }}">Editar Perfil</a>
+        </div>
+    </div>
+    <div class="profile-info">
+        <h5>Informações:</h5>
+        <div class="info-group">
+            <span>Nome:</span> {{ cliente.nome }}
+        </div>
+        <div class="info-group">
+            <span>CPF:</span> {{ cliente.cpf }}
+        </div>
+        <div class="info-group">
+            <span>Email:</span> {{ cliente.email }}
+        </div>
+        <div class="info-group">
+            <span>Endereço:</span> {{ cliente.rua }} - {{ cliente.bairro }}, CEP: {{ cliente.cep }}
+        </div>
+    </div>
+    <div class="mt-4">
+        <h5>Pacotes Comprados:</h5>
+        <div class="package-item">
+            <span>Pacote - Rio de Janeiro</span>
+            <span>R$ 589</span>
+            <span>⋮</span>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

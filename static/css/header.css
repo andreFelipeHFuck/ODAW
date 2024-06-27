@@ -1,0 +1,12 @@
+.menu-login{
+    margin-right: 4em;
+    font-size: 18px;
+}
+
+.menu-login-item{
+    width: 2em;
+}
+
+#logado{
+    list-style-type: none;
+}

@@ -1,0 +1,55 @@
+.login{
+    width: 30em;
+}
+
+.login-card{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--laranja);
+    border-radius: 15px;
+}
+
+.login-body{
+    width: 30rem;
+    height: 26em;
+    padding: 1em 5em;
+}
+
+.login-title{
+    font-size: 35px;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.login-input{
+    border: 2px solid var(--preto);
+    font-size: 20px;
+    padding: 0.5em 1.2em;
+    color: var(--preto);
+}
+
+.login-submit{
+    border: 2px solid var(--preto);
+    background-color: var(--laranja);
+    color: var(--preto);
+    font-size: 20px;
+    padding: 0.5em 1.2em;
+}
+
+.login-submit:hover{
+    font-weight: 700;
+    border: 2px solid var(--preto);
+    background-color: var(--laranja);
+    color: var(--preto);
+}
+
+.login-submit[type=submit]{
+    background-color: var(--laranja);
+    color: var(--preto);
+}

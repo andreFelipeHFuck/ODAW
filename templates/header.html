@@ -31,15 +31,35 @@
           <div class="nav-item-divider"></div>
           
         </ul>
-        <a class="nav-link" href="{{ url_for('secao') }}">
-            <strong>
-                Entrar
-            </strong>
-            ou 
-            <strong>
-                Cadastrar
-            </strong>
-        </a>
+
+        {% if session.get('logged_in') %}
+          <li class="nav-item dropdown menu-login" id="logado">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ session.get('nome') }}
+              <i class="bi bi-person-fill"></i>
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item menu-login-item text-primary" href="{{ url_for('pagina_perfil', id=session.get('id')) }}">Perfil</a></li>
+              <li><hr class="dropdown-divider"></li> 
+
+              <li><a class="dropdown-item menu-login-item text-danger" href=" {{ url_for('logout', id=session.get('id'))}}">Sair</a></li>
+            </ul>
+          </li>
+
+        {% else %}
+            
+            <a class="nav-link menu-login" id="deslogado" href="{{ url_for('secao') }}">
+                <strong>
+                    Entrar
+                </strong>
+                ou 
+                <strong>
+                    Cadastrar
+                </strong>
+            </a>
+
+        {% endif %}
       </div>
     </div>
   </nav>
