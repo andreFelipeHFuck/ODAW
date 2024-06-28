@@ -2,7 +2,7 @@ from main import app, db
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bcrypt import generate_password_hash, check_password_hash
 from models import Cliente
-from helpers import FormularioCadastroUsuario, FormularioLogin, FormularioAtualizarPerfil
+from helpers import FormularioCadastroUsuario, FormularioLogin, FormularioAtualizarPerfil, FormularioAtualizarSenha
 
 @app.route('/secao')
 def secao():
@@ -20,15 +20,14 @@ def autenticar():
 
     if cliente:
         senha = check_password_hash(cliente.senha, form.senha.data)
-        session['logged_in'] = True
-        session['id'] = cliente.codCliente
-        session['nome'] = cliente.nome
 
         if senha:
+            session['logged_in'] = True
+            session['id'] = cliente.codCliente
+            session['nome'] = cliente.nome
             return redirect(url_for('pagina_perfil', id=cliente.codCliente, cliente=cliente))
         else:
-            return redirect(url_for('index'))
-
+            return redirect(url_for('login'))
     else:
         return redirect(url_for('login'))
 
@@ -94,29 +93,30 @@ def cria_cliente():
 
 @app.route('/perfil/<int:id>')
 def pagina_perfil(id):
-    if 'cliente_logado' not in session or session['cliente_logado'] == None:
+    if 'logged_in' not in session or session['logged_in'] == None:
         return redirect(url_for('login'))
     
-
     cliente = Cliente.query.filter_by(codCliente=id).first()
     return render_template('perfil_usuario.html', cliente=cliente)
 
 @app.route('/editar_perfil/<int:id>')
 def editar_perfil(id):
-    if 'cliente_logado' not in session or session['cliente_logado'] == None:
+    if 'logged_in' not in session or session['logged_in'] == None:
         return redirect(url_for('login'))
     
     cliente = Cliente.query.filter_by(codCliente=id).first()
 
-    form = FormularioAtualizarPerfil()
-    form.nome.data = cliente.nome
-    form.cpf.data = cliente.cpf
-    form.email.data = cliente.email
-    form.rua.data = cliente.rua
-    form.bairro.data = cliente.bairro
-    form.cep.data = cliente.cep
+    form_cliente = FormularioAtualizarPerfil()
+    form_cliente.nome.data = cliente.nome
+    form_cliente.cpf.data = cliente.cpf
+    form_cliente.email.data = cliente.email
+    form_cliente.rua.data = cliente.rua
+    form_cliente.bairro.data = cliente.bairro
+    form_cliente.cep.data = cliente.cep
+
+    form_senha = FormularioAtualizarSenha()
     
-    return render_template('editar_usuario.html', form=form)
+    return render_template('editar_usuario.html', form_cliente=form_cliente, form_senha=form_senha)
 
 @app.route('/atualizar', methods=['POST', ])
 def atualizar_cliente():
@@ -140,4 +140,38 @@ def atualizar_cliente():
 
     return redirect(url_for('index'))
 
+@app.route('/atualizar_senha', methods=['POST', ])
+def atualizar_senha():
+    form = FormularioAtualizarSenha(request.form)
 
+    print(form.senha_atual.data)
+    print(form.senha_nova.data)
+
+    if form.validate_on_submit():
+        cliente = Cliente.query.filter_by(codCliente=session.get('id')).first()
+        senha = check_password_hash(cliente.senha, form.senha_atual.data)
+
+        if senha:
+            cliente.senha = generate_password_hash(form.senha_nova.data).decode('utf-8')
+
+            db.session.add(cliente)
+            db.session.commit()
+
+        return redirect(url_for('pagina_perfil', id=cliente.codCliente, cliente=cliente))
+
+    return redirect(url_for('editar_perfil', id=session.get('id')))
+
+
+@app.route('/deletar_perfil/<int:id>')
+def deletar_perfil(id):
+    if 'logged_in' not in session or session['logged_in'] == None:
+        return redirect(url_for('login'))
+    
+    Cliente.query.filter_by(codCliente=session.get('id')).delete()
+    db.session.commit()
+
+    session['logged_in'] = None
+    session['id'] = None
+    session['nome'] = None
+    
+    return redirect(url_for('index'))

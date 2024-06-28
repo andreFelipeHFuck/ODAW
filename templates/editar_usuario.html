@@ -25,69 +25,142 @@
     }
 </style>
 
-<body>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card card-custom mt-5">
                 <div class="card-body">
-                    <h2 class="card-title text-center">Cadastro</h2>
-                    <p class="text-center">preencha as informações abaixo</p>
+                    <h2 class="card-title text-center">Editar dados de usuário</h2>
+                    <p class="text-center">preencha as informações abaixo para atualizar o seu perfil</p>
                     <form method="POST" action="{{ url_for('atualizar_cliente') }}">
-                        {{ form.csrf_token() }}
+                        {{ form_cliente.csrf_token() }}
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-label-group">
-                                    {{ form.nome.label(class="form-label") }}
-                                    {{ form.nome(class="form-control") }}
+                                    {{ form_cliente.nome.label(class="form-label") }}
+                                    {{ form_cliente.nome(class="form-control") }}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-label-group">
-                                    {{ form.cpf.label(class="form-label") }}
-                                    {{ form.cpf(class="form-control") }}
+                                    {{ form_cliente.cpf.label(class="form-label") }}
+                                    {{ form_cliente.cpf(class="form-control") }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-label-group">
-                                    {{ form.email.label(class="form-label") }}
-                                    {{ form.email(class="form-control") }}
+                                    {{ form_cliente.email.label(class="form-label") }}
+                                    {{ form_cliente.email(class="form-control") }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-label-group">
-                                    {{ form.rua.label(class="form-label") }}
-                                    {{ form.rua(class="form-control") }}
+                                    {{ form_cliente.rua.label(class="form-label") }}
+                                    {{ form_cliente.rua(class="form-control") }}
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-label-group">
-                                    {{ form.bairro.label(class="form-label") }}
-                                    {{ form.bairro(class="form-control") }}
+                                    {{ form_cliente.bairro.label(class="form-label") }}
+                                    {{ form_cliente.bairro(class="form-control") }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-label-group">
-                                    {{ form.cep.label(class="form-label") }}
-                                    {{ form.cep(class="form-control") }}
+                                    {{ form_cliente.cep.label(class="form-label") }}
+                                    {{ form_cliente.cep(class="form-control") }}
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3 form-check checkbox-label">
-                            <input type="checkbox" class="form-check-input" id="termos">
-                            <label class="form-check-label" for="termos">Li e aceito os <a href="#">termos de condições</a> do serviço</label>
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary">Atualizar perfil</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card card-custom mt-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">
+                        Mudar senha
+                    </h2>
+                    <form method="POST" action="{{ url_for('atualizar_senha') }}">
+                        {{ form_senha.csrf_token() }}
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form_senha.senha_atual.label(class="form-label") }}
+                                    {{ form_senha.senha_atual(class="form-control") }}
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-label-group">
+                                    {{ form_senha.senha_nova.label(class="form-label") }}
+                                    {{ form_senha.senha_nova(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Atualizar Senha</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="alert alert-danger card card-custom mt-5">
+                <div class="card-body">
+                    <h2 class="card-title text-center">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        Excluir conta
+                    </h2>
+
+                    <p class="card-text">
+                        Depois de excluir sua conta, não há como voltar atrás. Por favor, tenha certeza que deseja excluir o seu perfil.
+                    </p>
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Excluir conta
+                    </button>
+                    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir conta</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Tem certeza que deseja excluir sua conta?
+                            </div>
+                             <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <a type="button" class="btn btn-danger" href="{{ url_for('deletar_perfil', id=session.get('id')) }}">Excluir conta</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </div>

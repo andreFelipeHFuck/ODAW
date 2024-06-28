@@ -20,6 +20,10 @@ class FormularioAtualizarPerfil(FlaskForm):
     bairro = StringField('Bairro', [validators.DataRequired(), validators.Length(min=1, max=50)])
     cep = StringField('CEP', [validators.DataRequired(), validators.Length(min=8)])
 
+class FormularioAtualizarSenha(FlaskForm):
+    senha_atual = PasswordField('Senha Atual', [validators.DataRequired(), validators.Length(min=1, max=100)])
+    senha_nova = PasswordField('Senha Nova', [validators.DataRequired(), validators.Length(min=1, max=100)])
+
 class FormularioLogin(FlaskForm):
     email = EmailField('Email', [validators.DataRequired(), validators.Length(min=1, max=50)])
     senha = PasswordField('Senha', [validators.DataRequired(), validators.Length(min=1, max=100)])
