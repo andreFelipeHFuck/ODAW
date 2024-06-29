@@ -69,14 +69,47 @@
             <span>Endereço:</span> {{ cliente.rua }} - {{ cliente.bairro }}, CEP: {{ cliente.cep }}
         </div>
     </div>
+
     <div class="mt-4">
         <h5>Pacotes Comprados:</h5>
-        <div class="package-item">
-            <span>Pacote - Rio de Janeiro</span>
-            <span>R$ 589</span>
-            <span>⋮</span>
+            <table class="table table-striped">
+                <tbody>
+                    {% for pacote in pacotes %}
+                        <tr>
+                            <td> 
+                                <a href="{{ url_for('pagina_pacote', id=pacote.codPacote) }}">
+                                    {{ pacote.nome }} 
+                                </a>
+                            </td>
+                            <td> R$ {{ pacote.preco }} </td>
+                            <td>
+                                <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Remover Pacote</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Deseja remover o pacote {{ pacote.nome }}?
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <a href="{{ url_for('remover_pacote', id=pacote.codPacote) }}" type="button" class="btn btn-danger">Remover Pacote</a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}   
+                </tbody>
+            </table>
         </div>
-    </div>
 </div>
 
 {% endblock main %}

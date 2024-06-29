@@ -8,17 +8,17 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema db_partiu
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema db_partiu
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `db_partiu` DEFAULT CHARACTER SET utf8 ;
 USE `db_partiu` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`cliente`
+-- Table `db_partiu`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`cliente` (
   `codCliente` INT NOT NULL AUTO_INCREMENT,
@@ -28,12 +28,14 @@ CREATE TABLE IF NOT EXISTS `db_partiu`.`cliente` (
   `bairro` VARCHAR(50) NOT NULL,
   `rua` VARCHAR(50) NOT NULL,
   `cep` CHAR(8) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `senha` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`codCliente`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`estado`
+-- Table `db_partiu`.`estado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`estado` (
   `codEstado` INT NOT NULL AUTO_INCREMENT,
@@ -43,7 +45,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`cidade`
+-- Table `db_partiu`.`cidade`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`cidade` (
   `codCidade` INT NOT NULL AUTO_INCREMENT,
@@ -55,14 +57,14 @@ CREATE TABLE IF NOT EXISTS `db_partiu`.`cidade` (
   INDEX `fk_cidade_estado1_idx` (`estado_codEstado` ASC) VISIBLE,
   CONSTRAINT `fk_cidade_estado1`
     FOREIGN KEY (`estado_codEstado`)
-    REFERENCES `mydb`.`estado` (`codEstado`)
+    REFERENCES `db_partiu`.`estado` (`codEstado`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`hotel`
+-- Table `db_partiu`.`hotel`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`hotel` (
   `codHotel` INT NOT NULL AUTO_INCREMENT,
@@ -77,42 +79,41 @@ CREATE TABLE IF NOT EXISTS `db_partiu`.`hotel` (
   INDEX `fk_hotel_cidade1_idx` (`cidade_codCidade` ASC) VISIBLE,
   CONSTRAINT `fk_hotel_cidade1`
     FOREIGN KEY (`cidade_codCidade`)
-    REFERENCES `mydb`.`cidade` (`codCidade`)
+    REFERENCES `db_partiu`.`cidade` (`codCidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`pacote`
+-- Table `db_partiu`.`pacote`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`pacote` (
   `codPacote` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
   `preco` DECIMAL(7,2) NOT NULL,
   `dataInicio` DATE NOT NULL,
   `dataFim` DATE NOT NULL,
   `descricao` TEXT NOT NULL,
   `cidade_codCidade` INT NOT NULL,
   `hotel_codHotel` INT NOT NULL,
-  `hotel_cidade_codCidade` INT NOT NULL,
-  PRIMARY KEY (`codPacote`, `cidade_codCidade`, `hotel_codHotel`, `hotel_cidade_codCidade`),
+  PRIMARY KEY (`codPacote`, `cidade_codCidade`, `hotel_codHotel`),
   INDEX `fk_pacote_cidade1_idx` (`cidade_codCidade` ASC) VISIBLE,
-  INDEX `fk_pacote_hotel1_idx` (`hotel_codHotel` ASC, `hotel_cidade_codCidade` ASC) VISIBLE,
+  INDEX `fk_pacote_hotel1_idx` (`hotel_codHotel` ASC) VISIBLE,
   CONSTRAINT `fk_pacote_cidade1`
     FOREIGN KEY (`cidade_codCidade`)
-    REFERENCES `mydb`.`cidade` (`codCidade`)
+    REFERENCES `db_partiu`.`cidade` (`codCidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pacote_hotel1`
-    FOREIGN KEY (`hotel_codHotel` , `hotel_cidade_codCidade`)
-    REFERENCES `mydb`.`hotel` (`codHotel` , `cidade_codCidade`)
+    FOREIGN KEY (`hotel_codHotel`)
+    REFERENCES `db_partiu`.`hotel` (`codHotel`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `mydb`.`pontoTuristico`
+-- Table `db_partiu`.`pontoTuristico`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`pontoTuristico` (
   `codPontoTuristico` INT NOT NULL AUTO_INCREMENT,
@@ -126,37 +127,13 @@ CREATE TABLE IF NOT EXISTS `db_partiu`.`pontoTuristico` (
   INDEX `fk_pontoTuristico_cidade1_idx` (`cidade_codCidade` ASC) VISIBLE,
   CONSTRAINT `fk_pontoTuristico_cidade1`
     FOREIGN KEY (`cidade_codCidade`)
-    REFERENCES `mydb`.`cidade` (`codCidade`)
+    REFERENCES `db_partiu`.`cidade` (`codCidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `mydb`.`restaurante`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `db_partiu`.`restaurante` (
-  `codRestaurante` INT NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(50) NOT NULL,
-  `categoria` INT(10) NOT NULL,
-  `descricao` TEXT NOT NULL,
-  `precoMedio` DECIMAL(7,2) NOT NULL,
-  `rua` VARCHAR(50) NOT NULL,
-  `bairro` VARCHAR(50) NOT NULL,
-  `cep` CHAR(8) NOT NULL,
-  `cidade_codCidade` INT NOT NULL,
-  PRIMARY KEY (`codRestaurante`, `cidade_codCidade`),
-  INDEX `fk_restaurante_cidade1_idx` (`cidade_codCidade` ASC) VISIBLE,
-  CONSTRAINT `fk_restaurante_cidade1`
-    FOREIGN KEY (`cidade_codCidade`)
-    REFERENCES `mydb`.`cidade` (`codCidade`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`cliente_has_pacote`
+-- Table `db_partiu`.`cliente_has_pacote`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`cliente_has_pacote` (
   `cliente_codCliente` INT NOT NULL,
@@ -166,19 +143,18 @@ CREATE TABLE IF NOT EXISTS `db_partiu`.`cliente_has_pacote` (
   INDEX `fk_cliente_has_pacote_cliente_idx` (`cliente_codCliente` ASC) VISIBLE,
   CONSTRAINT `fk_cliente_has_pacote_cliente`
     FOREIGN KEY (`cliente_codCliente`)
-    REFERENCES `mydb`.`cliente` (`codCliente`)
+    REFERENCES `db_partiu`.`cliente` (`codCliente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_cliente_has_pacote_pacote1`
     FOREIGN KEY (`pacote_codPacote`)
-    REFERENCES `mydb`.`pacote` (`codPacote`)
+    REFERENCES `db_partiu`.`pacote` (`codPacote`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
--- Table `mydb`.`pacote_has_pontoTuristico`
+-- Table `db_partiu`.`pacote_has_pontoTuristico`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_partiu`.`pacote_has_pontoTuristico` (
   `pacote_codPacote` INT NOT NULL,
@@ -191,12 +167,12 @@ CREATE TABLE IF NOT EXISTS `db_partiu`.`pacote_has_pontoTuristico` (
   INDEX `fk_pacote_has_pontoTuristico_pacote1_idx` (`pacote_codPacote` ASC) VISIBLE,
   CONSTRAINT `fk_pacote_has_pontoTuristico_pacote1`
     FOREIGN KEY (`pacote_codPacote`)
-    REFERENCES `mydb`.`pacote` (`codPacote`)
+    REFERENCES `db_partiu`.`pacote` (`codPacote`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pacote_has_pontoTuristico_pontoTuristico1`
     FOREIGN KEY (`pontoTuristico_codPontoTuristico`)
-    REFERENCES `mydb`.`pontoTuristico` (`codPontoTuristico`)
+    REFERENCES `db_partiu`.`pontoTuristico` (`codPontoTuristico`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

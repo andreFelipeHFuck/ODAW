@@ -27,3 +27,15 @@ class FormularioAtualizarSenha(FlaskForm):
 class FormularioLogin(FlaskForm):
     email = EmailField('Email', [validators.DataRequired(), validators.Length(min=1, max=50)])
     senha = PasswordField('Senha', [validators.DataRequired(), validators.Length(min=1, max=100)])
+
+def converte_data(data):
+    data = str(data).split('-')
+
+    return f'{data[2]}/{data[1]}/{data[0]}'
+
+def recupera_imagem(id):
+    for nome_arquivo in os.listdir(app.config['PACOTES_PATH']):
+        if f'pacote_{id}' in nome_arquivo:
+            return nome_arquivo
+        
+    return 'pacote_padrao.jpg'

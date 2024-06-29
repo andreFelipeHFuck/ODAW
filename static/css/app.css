@@ -5,6 +5,7 @@
 @import url(secao.css);
 @import url(login.css);
 @import url(cadastro_cliente.css);
+@import url(destinos.css);
 
 :root{
     --preto: #000000ff;

@@ -1,0 +1,158 @@
+{% extends "template.html" %}
+
+{% block main %}
+
+<style>
+    .card-custom {
+        margin-bottom: 20px;
+    }
+    .card-title {
+        font-weight: bold;
+    }
+    .section-title {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="princiapais-destinos d-flex">
+        <div class="row principais-destinos-destinos">
+            {% for pacote in principais_pacotes %}
+
+                <div class="col-md-4">
+                    <div class="card card-custom principais-destinos-card">
+                        <img src="{{ url_for('imagem', codPacote=pacote.codPacote) }}" class="card-img-top principais-destinos-image" alt="...">
+                        <div class="card-body">
+                            <a href="{{ url_for('pagina_pacote', id=pacote.codPacote) }}" class="principais-destinos-link">
+                                <h5 class="card-subtitle principais-destinos-titulo">
+                                    {{ pacote.nome }}
+                                </h5>
+                            </a>
+                            <p class="card-text princiapais-destinos-preco">a partir de: </p>
+                            <p class="card-text">
+                                R$
+                                <strong class="princiapais-destinos-preco-valor">
+                                    {{ pacote.preco }}
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+
+        <div class="row principais-destinos-enunciado">
+            <div class="col-md-12">
+                <h2 class="section-title principais-destinos-enunciado-titulo">
+                    <strong>
+                        <i class="bi bi-suitcase-lg-fill"></i>
+                        Pacotes
+                    </strong>
+                </h2>
+                <p>Saindo de Joinville</p>
+                <h4>Uma seleção de pacotes para suas próximas férias</h4>
+            </div>
+        </div>
+    </div>
+   
+
+    <!-- Seção de Outros Destinos -->
+    <div class="row section-title">
+        <div class="col-md-12">
+            <h2>
+                <strong>Outros destinos para sua viagem</strong>
+            </h2>
+            <p>Viagens com até 50% de desconto</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Rio de Janeiro</h5>
+                    <p class="card-text">a partir de: R$ 248</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Maceió</h5>
+                    <p class="card-text">a partir de: R$ 548</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Florianópolis</h5>
+                    <p class="card-text">a partir de: R$ 150</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">Salvador</h5>
+                    <p class="card-text">a partir de: R$ 230</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">São Paulo</h5>
+                    <p class="card-text">a partir de: R$ 200</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">Porto Alegre</h5>
+                    <p class="card-text">a partir de: R$ 172</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">Fortaleza</h5>
+                    <p class="card-text">a partir de: R$ 784</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">Natal</h5>
+                    <p class="card-text">a partir de: R$ 1.140</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">Aracaju</h5>
+                    <p class="card-text">a partir de: R$ 654</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-custom">
+                <div class="card-body">
+                    <h5 class="card-title">Recife</h5>
+                    <p class="card-text">a partir de: R$ 744</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

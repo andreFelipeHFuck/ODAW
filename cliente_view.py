@@ -1,7 +1,7 @@
 from main import app, db
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bcrypt import generate_password_hash, check_password_hash
-from models import Cliente
+from models import Cliente, Cliente_has_pacote, Pacote
 from helpers import FormularioCadastroUsuario, FormularioLogin, FormularioAtualizarPerfil, FormularioAtualizarSenha
 
 @app.route('/secao')
@@ -89,6 +89,10 @@ def cria_cliente():
 
     cliente = Cliente.query.filter_by(email=email, senha=senha).first()
 
+    session['logged_in'] = True
+    session['id'] = cliente.codCliente
+    session['nome'] = cliente.nome
+
     return redirect(url_for('pagina_perfil', id=cliente.codCliente, cliente=cliente))
 
 @app.route('/perfil/<int:id>')
@@ -97,7 +101,12 @@ def pagina_perfil(id):
         return redirect(url_for('login'))
     
     cliente = Cliente.query.filter_by(codCliente=id).first()
-    return render_template('perfil_usuario.html', cliente=cliente)
+    pacotes_query = db.select(Pacote.codPacote, Pacote.nome, Pacote.preco).select_from(Pacote).join(Cliente_has_pacote, Pacote.codPacote == Cliente_has_pacote.pacote_codPacote).where(Cliente_has_pacote.cliente_codCliente == Cliente.codCliente)
+
+    pacotes = db.session.execute(pacotes_query)
+
+    print(pacotes)
+    return render_template('perfil_usuario.html', cliente=cliente, pacotes=pacotes)
 
 @app.route('/editar_perfil/<int:id>')
 def editar_perfil(id):

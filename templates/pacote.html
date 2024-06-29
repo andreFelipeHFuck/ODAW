@@ -1,0 +1,134 @@
+{% extends "template.html" %}
+
+{% block main %}
+
+<style>
+    .container {
+        margin-top: 50px;
+    }
+    .card {
+        border: none;
+    }
+    .btn-custom {
+        background-color: #343a40;
+        color: #fff;
+        border-radius: 25px;
+        padding: 10px 30px;
+    }
+    .btn-custom:hover {
+        background-color: #495057;
+    }
+</style>
+
+<div class="container">
+<div class="row">
+    <div class="col-lg-8">
+        <h1>
+            {{ pacote.nome }}
+        </h1>
+        <h4>
+            <strong>
+                Cidade:
+            </strong>
+            <a href="">
+                {{ cidade.nome }}
+            </a>
+        </h4>
+        <p>
+            Descrição
+        </p>
+    </div>
+    <div class="col-lg-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">Dados:</h5>
+                <p class="card-text">
+                    <strong>Hospedagem:</strong> 
+
+                    <a href="">
+                        {{ hotel.nome }}
+                    </a>
+                </p>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <strong>
+                            De:
+                        </strong>
+                        {{ pacote.dataInicio }} à {{ pacote.dataFim }}
+                    </li>
+                    <li>
+                        <strong>
+
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+
+                        </strong>
+                    </li>
+                </ul>
+                <h5 class="card-title">Preço:</h5>
+                <p class="card-text"><strong>
+                    R$ {{ pacote.preco }}
+                </strong></p>
+
+                {% if not comprado %}
+                    <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Comprar pacote
+                    </button>
+                    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Comprar Pacote</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Deseja comprar o pacote {{ pacote.nome }}?
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <a href="{{ url_for('comprar_pacote', id=pacote.codPacote) }}" type="button" class="btn btn-primary">Comprar Pacote</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Remover Pacote
+                    </button>
+                    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Remover Pacote</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Deseja remover o pacote {{ pacote.nome }}?
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <a href="{{ url_for('comprar_pacote', id=pacote.codPacote) }}" type="button" class="btn btn-primary">Comprar Pacote</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock main %}

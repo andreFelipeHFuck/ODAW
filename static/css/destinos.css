@@ -1,0 +1,46 @@
+.princiapais-destinos{
+    gap: 4em;
+    justify-content: center;
+}
+
+.principais-destinos-destinos{
+    display: flex;
+}
+
+.principais-destinos-card{
+    width: 15em;
+    border-radius: 20px;
+    margin: 0 0.8em;
+}
+
+.principais-destinos-image{
+    height: 14em;
+}
+
+.principais-destinos-link{
+    text-decoration: none;
+}
+
+.principais-destinos-titulo{
+    color: var(--preto);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.principais-destinos-titulo:hover{
+    color: var(--laranja);
+}
+
+.princiapais-destinos-preco{
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    font-size: 18px; 
+}
+   
+.princiapais-destinos-preco-valor{
+    font-size: 30px;
+}
+
+.principais-destinos-enunciado-titulo{
+    font-size: 45px;
+}
